@@ -1,0 +1,20 @@
+@page {
+    size: 5.5in 8.5in;
+
+    table, figure {
+        //page-break-inside: avoid;
+    }
+}
+
+@media print {
+
+    .idg-no-print {
+        display: none;
+    }
+
+    .idg-print-banner {
+        svg {
+            width: 1rem;
+        }
+    }
+}

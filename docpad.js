@@ -64,6 +64,8 @@ module.exports = {
                 headMatter: fs.readFileSync(partialsDir + '/' + 'head-matter.html.handlebars', 'utf8'),
                 header: fs.readFileSync(partialsDir + '/' + 'header.html.handlebars', 'utf8'),
                 footer: fs.readFileSync(partialsDir + '/' + 'footer.html.handlebars', 'utf8'),
+                printBanner: fs.readFileSync(partialsDir + '/' + 'print-banner.html.handlebars', 'utf8'),
+                printFooter: fs.readFileSync(partialsDir + '/' + 'print-footer.html.handlebars', 'utf8'),
                 sidebar: fs.readFileSync(partialsDir + '/' + 'sidebar.html.handlebars', 'utf8'),
                 activitiesIcon: fs.readFileSync(staticImagesDir + '/' + 'icon-hexagon.svg', 'utf8'),
                 principlesIcon: fs.readFileSync(staticImagesDir + '/' + 'icon-circle.svg', 'utf8'),

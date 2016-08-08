@@ -10,20 +10,49 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
 var fs = require("fs");
+var hb = require("handlebars");
+
+var svgs = {
+    "principles": fs.readFileSync("src/static/images/icon-circle.svg", 'utf8'),
+    "practices": fs.readFileSync("src/static/images/icon-diamond.svg", 'utf8'),
+    "tools": fs.readFileSync("src/static/images/icon-square.svg", 'utf8'),
+    "activities": fs.readFileSync("src/static/images/icon-hexagon.svg", 'utf8')};
 
 module.exports.helpers = {};
 
 module.exports.helpers.getCategoryIcon = function (category) {
-    switch (category.toLowerCase()) {
-        case ("principles"):
-            return (fs.readFileSync("src/static/images/icon-circle.svg", 'utf8'));
-        case ("practices"):
-            return (fs.readFileSync("src/static/images/icon-diamond.svg", 'utf8'));
-        case ("tools"):
-            return (fs.readFileSync("src/static/images/icon-square.svg", 'utf8'));
-        case ("activities"):
-            return (fs.readFileSync("src/static/images/icon-hexagon.svg", 'utf8'));
-        default:
-            return;
-    }
+    return svgs[category.toLowerCase()];
+};
+
+module.exports.helpers.getPrintBanner = function (category, printBreak) {
+
+    /*
+Testing stuff. Commented out for now.
+
+    TEMPLATE:
+
+    <div class="idg-print-banner idg-print-only idg-print-page-break">
+        {{{getCategoryIcon document.category}}} <-- SVG
+        {{document.category}} <-- string
+    </div>
+    */
+
+    // var banner = document.createElement ("div");
+    // banner.className += "idg-print-banner idg-print-only";
+    // banner.appendChild(module.exports.helpers.getCategoryIcon(category)); // getCategoryIcon()
+    // banner.textContent(category); // add category string
+    //
+    // if (printBreak) {
+    //     banner.className += "idg-print-page-break";
+    // }
+
+
+
+    // IGNORE THIS: this builds a string. For reference only
+    // var banner = module.exports.helpers.getCategoryIcon(category) + category + '</div>';
+    // if (printBreak) {
+    //     banner = 'idf-print-page-break>' + banner;
+    // }
+    // banner = '<div class="idg-print-banner idg-print-only ' + banner;
+    // return new hb.SafeString(banner);
 }

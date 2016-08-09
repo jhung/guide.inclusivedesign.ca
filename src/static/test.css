@@ -1,0 +1,15 @@
+.test-class {
+    color: yellow;
+}
+
+.test-class:nth-of-type(1) {
+    color: red;
+}
+
+.test-class:nth-of-type(1) {
+    color: green;
+}
+
+.test-class:nth-of-type(1) {
+    color: blue;
+}

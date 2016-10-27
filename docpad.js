@@ -30,7 +30,7 @@ var imagesDestDir = "out/images";
 
 var fs = require('fs');
 var partialsDir = 'src/layouts/partials';
-var staticImagesDir = 'src/static/images'
+var staticImagesDir = 'src/static/images';
 
 module.exports = {
     rootPath: rootPath,
@@ -58,7 +58,7 @@ module.exports = {
                 "/principles/Interconnectedness.html": "/insights/Interconnectedness.html",
                 "/principles/OneSizeFitsOne.html": "/insights/OneSizeFitsOne.html",
                 "/principles/UserContinuedDesign.html": "/insights/UserContinuedDesign.html",
-                "/principles/VirtuousCycles.html": "/insights/VirtuousCycles.html"         
+                "/principles/VirtuousCycles.html": "/insights/VirtuousCycles.html"
             }
         },
         handlebars: {
@@ -67,7 +67,8 @@ module.exports = {
                 getGithubLocation: docsCore.helpers.makeGithubLocationHelper(githubDocRoot),
                 getRelativeUrl: docsCore.helpers.getRelativeUrl,
                 ifEqual: docsCore.helpers.ifEqual,
-                getCategoryIcon: guidelinesHelpers.helpers.getCategoryIcon
+                getCategoryIcon: guidelinesHelpers.helpers.getCategoryIcon,
+                insertPrintBreak: guidelinesHelpers.helpers.insertPrintBreak
             },
             partials: {
                 headMatter: fs.readFileSync(partialsDir + '/' + 'head-matter.html.handlebars', 'utf8'),
@@ -114,6 +115,17 @@ module.exports = {
                 // Disable compression on the development environment
                 compress: false
             }
+        }
+    },
+
+    events: {
+        renderBefore: function() {
+            // Create the output directory for the print output parts
+            guidelinesHelpers.helpers.createPrintDirectories()
+        },
+        writeAfter: function () {
+            // Concatenate print files into 2-cards-per-side duplex order.
+            guidelinesHelpers.helpers.createPrintFile()
         }
     }
 };

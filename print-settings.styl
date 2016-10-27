@@ -1,0 +1,52 @@
+/* Print font size. (Default: 10pt)
+Note: Changes to this value affects layout of all cards.*/
+printFontSize = 10pt;
+
+/* Cutting guides. (Default: true)
+Print cutting guides on one print side by default. Set to false to hide guides. */
+enableCuttingGuides = true;
+
+/* Card width. (Default: 50%)
+The percentage of a printed side a card should occupy. By default it is 50%
+(2 cards per printed side). */
+cardWidth = 50%;
+
+/* Card height (Default: 7in)
+Set card height to slightly smaller than print height to accomodate printer's
+factory margins. By default it is 7 inches to accomodate an 8.5 inch page
+height.
+
+If your printer is cutting off text, adjust cardHeight or printFontSize. */
+cardHeight = 7in;
+
+/* Card content margin. (Default: 0.3in)
+The interior margin that surrounds the card content. If set to 0, the card
+content will be up against the cut edges.*/
+cardContentMargin = 0.3in;
+
+/* Header and footer height. (Default: 0.5in)*/
+headerFooterHeight = 0.5in;
+
+/* Footer logo width */
+headerFooterIconWidth = 0.3in;
+
+/* Rotate reverse side
+On some printers, it may be necessary to rotate the back side 180 degrees so
+the top of each card aligns. Disabled by default. Set to true if needed. */
+enableReverseSideRotation = false;
+
+/* Colours for categories.
+Appears in the headers of all cards. */
+insightsColor = #008b82;
+practicesColor = #0e75ba;
+toolsColor = #c02b56;
+activitiesColor = #ee3f23;
+
+/* Font
+Default font is OpenSans. Change as needed. */
+@font-face {
+    font-family: "OpenSans";
+    src: url("/fonts/OpenSans-Regular.ttf") format('truetype');
+}
+
+// END PRINT VARIABLES

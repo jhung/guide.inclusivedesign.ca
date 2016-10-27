@@ -50,5 +50,55 @@ To create a static version of the site, run: `docpad generate --env static`. Thi
 # Differences with docs-template
 The Inclusive Design Guide uses the `docs-template` project, but uses a slightly different template structure. The `docs-template` uses a single content template `default.html.handlebars`. The Inclusive Design Guide instead refactored that default template into partials located in the `/layouts/partials/` directory.
 
+# Printing the Inclusive Design Guide
+
+## Inserting Front / Back Card Splits in the Content
+
+## Preparing to Print
+Before printing, use print preview to ensure all content is visible. If there
+are problems, refer to the Print Troubleshooting section below.
+
+It is recommended to test print first two pages before printing all the content.
+
+Configure the printer settings (not all of these features may be present for
+your printer):
+* Page orientation set to Landscape
+* Disable "scale to fit" or any "fit to page" feature
+* Enable duplex printing if available. If not, refer to "Printer does not have a
+duplex feature" in the Print Troubleshooting section.
+* If there is a print binding edge, set it to the short edge.
+* Set print margins to as small as possible.
+
+## Print Troubleshooting:
+
+Note: many solutions reference changing configuration variables within the
+`print-settings.styl` file.
+
+Problem: Content is getting cut off above the footer.
+Solution:
+* cut down text from the content
+* decrease the `printFontSize`
+* decrease header and footer size
+
+Problem: Content is getting cut off along the sides.
+Solution:
+* reduce the `cardWidth`, or increase `cardContentMargin`.
+
+Problem: The front side and back side don't align properly.
+Solution:
+* remove any margins set by the printer
+* in printer settings, set the print binding edge to the short side
+
+Problem: The reverse side is printing upside down.
+* in printer's duplex settings, enable reverse side rotation, or set the
+  variable `enableReverseSideRotation` to "true".
+
+Problem: Cutting guides are not all visible
+* reduce `cardWidth`
+
+Problem: Printer does not have a duplex feature
+* print odd numbered pages first, then load the printed odd pages back into
+  the printer's paper tray and then print the even numbered pages.
+
 # License Information
 The docs-template project is licensed under Creative Commons Attribution 3.0 - http://creativecommons.org/licenses/by/3.0/

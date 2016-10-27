@@ -1,0 +1,206 @@
+@import "../../../print-settings";
+
+html {
+    font-family: "OpenSans";
+}
+
+body {
+    font-size: printFontSize;
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.4rem;
+}
+
+img, svg {
+    max-width: 100%; // Ensure that images don't bleed past card edge.
+}
+
+/*Card layout:
+<article>
+   <section> Card 1 front</section>
+   <section> Card 2 front</section>
+</article>
+<article>
+   <section> Card 2 back</section>
+   <section> Card 1 back</section>
+</article>*/
+
+article {
+    height: cardHeight;
+    page-break-after: always; // insert a page break per print side.
+    position: relative; // set position to relative to allow proper positioning
+                        // of card content with absolute values
+}
+
+article:last-of-type {
+    // don't put a page break after the last card.
+    page-break-after: auto;
+}
+
+article:nth-of-type(2n+1) section {
+    // Absolutely position the cards to the bottom of the print page so
+    // that everything aligns properly when duplex printed.
+    bottom: 0;
+
+    // insert cutting guides if specified.
+    if (enableCuttingGuides) {
+        border-bottom: 0.1rem dashed #afafaf;
+        border-left: 0.1rem dashed #afafaf;
+        border-right: 0.1rem dashed #afafaf;
+    }
+}
+
+/*
+If enableCuttingGuides is "true", then make the card width slightly smaller so
+the right guide doesn't fall outside printable area. */
+ if (enableCuttingGuides) {
+    cardWidth = cardWidth - 0.1rem;
+}
+
+
+// Each card is contained in a <section>. Set up each section to use flex so
+// that content fills available space, and footer always appears at the bottom.
+section {
+    display:flex;
+    flex-flow: column;
+    width: cardWidth;
+    overflow:hidden;
+
+    // Set the height 100% so the footer always appears at the bottom.
+    height: 100%;
+    max-height: 100%;
+
+    // Use absolute positioning to position the second card on the right.
+    position: absolute;
+}
+
+section:nth-of-type(2) {
+    // Position the second card starting at the right edge of the first card.
+    left: cardWidth;
+}
+
+// The container for the card content. Doesn't include its header and footer.
+.idg-print-cardContent {
+    flex: 1; // fill the available space.
+    padding: 0 cardContentMargin;
+
+    h1 {
+        margin-top: 0.3in;
+        font-weight: normal;
+    }
+}
+
+header, footer {
+    height: headerFooterHeight;
+    line-height: headerFooterHeight;
+    padding: 0 cardContentMargin;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+header {
+    color: #fff;
+    svg {
+        vertical-align: middle;
+        width: headerFooterIconWidth;
+        fill: #fff;
+    }
+}
+
+footer img {
+    width: headerFooterIconWidth;
+}
+
+/*
+Typically background colours are not printed. Therefore we set the background
+colour by using an SVG instead of using background-color CSS property.
+*/
+setHeaderProperties(theColor) {
+
+    // Stretch the SVG to fill the entire header area.
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    max-width: 100%;
+    height: 0.5in;
+    rect {
+        width: 100%;
+        height: 100%;
+    }
+
+    // Set the SVG to the back so it doesn't cover the header icon and text.
+    z-index: -1;
+
+    // Set the colour of the SVG.
+    fill: theColor;
+}
+
+// Print header and footer colours
+.idg-category-Insights .idg-print-background-svg {
+    setHeaderProperties(insightsColor);
+}
+.idg-category-Practices .idg-print-background-svg {
+    setHeaderProperties(practicesColor);
+}
+.idg-category-Tools .idg-print-background-svg {
+    setHeaderProperties(toolsColor);
+}
+.idg-category-Activities .idg-print-background-svg {
+    setHeaderProperties(activitiesColor);
+}
+
+// Icons that appear in lists.
+.idg-iconInsights,
+.idg-iconPractices,
+.idg-iconTools,
+.idg-iconActivities {
+    // vertically centre the SVG.
+    display: flex;
+    align-items: center;
+
+    svg {
+        width: 1rem;
+        height: 1rem; //width and height required by IE11.
+    }
+}
+
+.idg-iconInsights svg {
+    fill: insightsColor;
+}
+.idg-iconPractices svg {
+    fill: practicesColor;
+}
+.idg-iconTools svg {
+    fill: toolsColor;
+}
+.idg-iconActivities svg {
+    fill: activitiesColor;
+}
+
+// List Styling
+.idg-articleContentUseWhyHow li,
+.idg-articleContentUse li {
+    list-style-type: none;
+    line-height: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+// Remove text decoration on links in the lists
+.idg-articleContentUseWhyHow a,
+.idg-articleContentUse a {
+    text-decoration: none;
+    color: #000;
+    margin-left: 0.5rem;
+}
+
+// On some printers, it may be necessary to rotate the back side 180 degrees so
+// the top of each card aligns.
+if (enableReverseSideRotation) {
+    article:nth-of-type(2n+2) {
+        transform: rotate(180deg);
+    }
+}

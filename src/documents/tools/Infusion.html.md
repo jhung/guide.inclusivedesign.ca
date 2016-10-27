@@ -1,6 +1,7 @@
 ---
 title: Infusion
 layout: content
+additionalLayouts: print
 category: Tools
 ---
 
@@ -8,4 +9,6 @@ Infusion is a code framework for building personalizable and adaptive applicatio
 
 Infusion provides individuals with a way to actively engage in the creative process by adapting or redesigning an application to suit their personal needs and preferences. Components such as User Interface Options (http://build.fluidproject.org/infusion/demos/uiOptions/) offer customization features that support the discovery of personal preferences, allowing for one-size-fits-one customizations and storage of portable preferences.
 
-The Infusion framework gives developers a way to build open, modular systems that can be changed and configured during use, so that anyone can modify and adapt it to create systems, applications, components, etc. that meet their specific use cases and needs. The Infusion framework reflects an accumulation of experience about how to make applications accessible, and is as much about community values, shared inclusive practices, and documentation as it is about code and components. 
+<div class="idg-print-break"></div>
+
+The Infusion framework gives developers a way to build open, modular systems that can be changed and configured during use, so that anyone can modify and adapt it to create systems, applications, components, etc. that meet their specific use cases and needs. The Infusion framework reflects an accumulation of experience about how to make applications accessible, and is as much about community values, shared inclusive practices, and documentation as it is about code and components.

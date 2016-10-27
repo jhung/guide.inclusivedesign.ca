@@ -1,6 +1,7 @@
 ---
 title: Mindmaps
 layout: content
+additionalLayouts: print
 category: Tools
 ---
 
@@ -8,10 +9,12 @@ Mindmaps are visual diagrams used for organizing often complex information relat
 
 Creating a mindmap is one way to dig deeper into the more complex layers of how a product or system might work. It can be used to explore different options, and/or to present a bigger picture of a complex system. In this way it enables designers or developers to better contextualize a specific topic, concept or system.
 
+<div class="idg-print-break"></div>
+
 Examples of mindmapping can be found at the following link: https://wiki.fluidproject.org/display/fluid/%28PGA%29+Mind+Mapping
 
 Note: Although mindmaps are traditionally visual tools, they can be created and presented in ways that are accessible to non-visual users. For example, they can be created using digital tools that are compatible with screen readers, such as Google Draw. Or they can be presented to an audience with an accompanying text description that includes a step-by-step description of the flow of information.
-  
+
 ## Try
 
 1. Start with the central concept or initial state.

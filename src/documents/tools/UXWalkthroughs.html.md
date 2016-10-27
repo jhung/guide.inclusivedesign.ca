@@ -1,6 +1,7 @@
 ---
 title: UX Walkthroughs
 layout: content
+additionalLayouts: print
 category: Tools
 ---
 
@@ -10,6 +11,8 @@ The UX Walkthrough technique is a synthesis of conventional methods (heuristic e
 
 A UX Walkthrough can be performed by novices as well as experienced evaluators. The result is a comprehensive and multidimensional report of usability and accessibility issues.
 
+<div class="idg-print-break"></div>
+
 ## Try
 1. Choose a user
 2. Specify an explicit user goal
@@ -18,5 +21,5 @@ A UX Walkthrough can be performed by novices as well as experienced evaluators. 
 5. Plan both the Heuristic Evaluation and the Cognitive Walkthrough
 6. Perform the walkthrough and record the results
 
-Please find more details about performing a UX Walkthrough at the following link: 
+Please find more details about performing a UX Walkthrough at the following link:
 https://wiki.fluidproject.org/display/fluid/User+Experience+Walkthroughs

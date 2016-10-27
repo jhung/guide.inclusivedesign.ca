@@ -14,31 +14,17 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 var githubDocRoot = "https://github.com/inclusive-design/guide.inclusivedesign.ca/tree/master/src/documents/";
 
 var path = require("path");
-var fs = require("fs");
+var fs = require("fs-extra");
 var docsCore = require("docs-core");
 var guidelinesHelpers = require('./helpers/idg.js');
 var siteStructure = JSON.parse(fs.readFileSync("site-structure.json"));
 
-// We locate the images within the src/documents directory so that images can
-// be viewed on GitHub, as well as in the DocPad output. We need to
-// instruct DocPad to treat the images specially so that they are not
-// processed. We tell DocPad to ignore the images using "ignorePaths" and we
-// then copy them ourselves with a "writeAfter" event handler.
-var rootPath = process.cwd();
-var imagesSrcDir = path.join(rootPath, "src", "documents", "images");
-var imagesDestDir = "out/images";
 
-var fs = require('fs');
+//var rootPath = process.cwd();
 var partialsDir = 'src/layouts/partials';
 var staticImagesDir = 'src/static/images';
 
 module.exports = {
-    rootPath: rootPath,
-    filesPaths: [
-        docsCore.getStaticFilesDir(),
-        "static"
-    ],
-    ignorePaths: [ imagesSrcDir ],
     renderSingleExtensions: true,
     templateData: {
         siteStructure: siteStructure

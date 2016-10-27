@@ -9,7 +9,7 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
-var fs = require("fs");
+var fs = require("fs-extra");
 var path = require("path");
 var sanitize = require("sanitize-filename");
 var mkdirp = require("mkdirp");
@@ -209,8 +209,11 @@ module.exports.helpers.insertPrintBreak = function (theDocumentMetadata, theCont
  * Create the directory which will hold the split content files.
  */
 module.exports.helpers.createPrintDirectories = function () {
-    // check if output path exists, otherwise make it
 
+    // delete the print directory if it exists.
+    fs.removeSync (outputPrintPartsPath);
+
+    // check if output path exists, otherwise make it
     mkdirp(outputPrintPartsPath, function (err) {
         if (err) {
             return console.error(err);

@@ -13,11 +13,16 @@ var fs = require("fs-extra");
 var path = require("path");
 var sanitize = require("sanitize-filename");
 var mkdirp = require("mkdirp");
-var branding = JSON.parse(fs.readFileSync("src/static/print-branding/branding.json"));
+var childProcess = require('child_process');
 
+var branding = JSON.parse(fs.readFileSync("src/static/print-branding/branding.json"));
 var workingPath = process.cwd();
 var outputPrintPartsPath = path.join(workingPath,"out","printParts");
-var outputPrintFilename = "InclusiveDesignGuide-print.html"
+var outputPrintFinalPath = path.join(workingPath,"out","print");
+var outputPrintFinalFilename = "all.html"
+
+var currentRevision = childProcess.execSync('git rev-parse --short HEAD').toString().trim();
+var currentDate = new Date().toJSON().slice(0,10);
 
 module.exports.helpers = {};
 
@@ -41,7 +46,7 @@ module.exports.helpers.getCategoryIcon = function (category) {
         case ("dimensions"):
             return (fs.readFileSync("src/static/images/icon-dimension.svg", 'utf8'));
         default:
-            return;
+            return (fs.readFileSync("src/static/images/idrc-logo.svg", 'utf8'));
     }
 };
 
@@ -56,7 +61,7 @@ module.exports.helpers.getCategoryIcon = function (category) {
 getPrintHeader = function (theDocumentMetadata) {
 
     // Todo: re-implement this as a partial.
-    return "<section class='idg-category-"+theDocumentMetadata.meta.category+
+    return "<section class='idg-category-"+theDocumentMetadata.meta.category.replace(/ /g,"")+
             "'><header class='idg-print-header'>"+
             "<svg class='idg-print-background-svg'><rect width='100%' height='100%'></rect></svg>"+
             module.exports.helpers.getCategoryIcon(theDocumentMetadata.meta.category)+
@@ -73,9 +78,11 @@ getPrintHeader = function (theDocumentMetadata) {
  */
 getPrintFooter = function () {
 
+
     // Todo: re-implement this as a partial.
     return "</div><footer class='idg-print-footer'>"+
-            "<img src='/print-branding/logo.svg'>"+branding[0].organization+
+            "<img src='../print-branding/logo.svg'>"+branding[0].organization+
+            "<span class='idg-print-revision'>"+currentDate+" (ver. "+currentRevision + ")</span>" +
             "</footer></section>";
 };
 
@@ -119,6 +126,9 @@ The resulting split content array would be:
 */
 parseSplits = function (theContent, theToken) {
 
+    // Count the number of splits.
+    var splitCount = 0;
+
     // TODO: To fix - regex should not treat multiple instances of the token on
     // a single line as a SINGLE match.
     var regex = theToken || /(<div[^>](?:.*)class=["'](?:.*)\bidg-print-break\b(?:.*)["']><\/div>)/gm;
@@ -138,6 +148,7 @@ parseSplits = function (theContent, theToken) {
             }
 
         } else if (splitContent[i].match(regex)) {
+            splitCount++;
             if (i==splitContent.length-1) {
                 splitContent.push("");
             } else if (splitContent[i+1].match(regex)) {
@@ -149,6 +160,13 @@ parseSplits = function (theContent, theToken) {
                 splitContent.splice(i, 0, "");
             }
         }
+    }
+
+    if (splitCount%2 == 0) {
+        // If there are an even number of splits, then we will need to add another
+        // blank page, otherwise the subsequent cards will not pay out in proper
+        // duplex order.
+        splitContent.push("");
     }
 
     // Remove the tokens from the output before returning
@@ -210,7 +228,7 @@ module.exports.helpers.insertPrintBreak = function (theDocumentMetadata, theCont
  */
 module.exports.helpers.createPrintDirectories = function () {
 
-    // delete the print directory if it exists.
+    // delete old print parts directory so old files don't pollute the output.
     fs.removeSync (outputPrintPartsPath);
 
     // check if output path exists, otherwise make it
@@ -219,6 +237,14 @@ module.exports.helpers.createPrintDirectories = function () {
             return console.error(err);
         }
     });
+};
+
+/**
+ * Delete the directory which holds the split content files.
+ */
+module.exports.helpers.deletePrintDirectories = function () {
+    // delete the print directory if it exists.
+    fs.removeSync (outputPrintPartsPath);
 };
 
 /**
@@ -277,7 +303,6 @@ function cards (path, files, emptyCard) {
                 duplexContent += "<article>"+item.content;
             }
         });
-
         return duplexContent;
     };
     return that;
@@ -285,24 +310,39 @@ function cards (path, files, emptyCard) {
 
 module.exports.helpers.createPrintFile = function () {
     var files = new Array ();
-    var outputPrintFilePath = path.join (workingPath,'out', outputPrintFilename);
+    var outputPrintFilePath = path.join (outputPrintFinalPath, outputPrintFinalFilename);
     var outputString = new String();
 
-    // Clear the file for writing.
-    fs.writeFileSync(outputPrintFilePath, outputString, 'utf8');
+    // Get the final print file ready for writing.
+    writeFile(outputPrintFilePath, outputString, '');
 
     // Go through all the HTML content parts and put them into duplex order.
+    var instructions = new Array();
+
     fs.readdir(outputPrintPartsPath, function(err, files) {
-        // Remove any non HTML files from the list to be processed
+        // Clean up the list of files in the print parts directory.
         for (var i=0; i<files.length; i++) {
             if (files[i].substr(-5) !== '.html') {
+                // Remove any non HTML files from the list to be processed.
                 files.splice(i,1);
+            } else if (files[i].substr(0,27) === 'The Inclusive Design Guide-') {
+                // Find any Instructions, copy them to another array and
+                // temporarily remove from the files list. The Instructions
+                // will be added back later.
+                instructions.push(files[i]);
+                files.splice(i,1);
+                i--; // adjust the counter because an element was removed.
             }
         }
 
+        // Take any Instructions found and put them in the front of the files
+        // list. We want instructions to appear first when printing.
+        files = instructions.concat(files);
+
+        // Initialize the list of cards to output.
         var theCards = cards (outputPrintPartsPath, files);
 
-        // Insert starting HTML elements for the output (body, article, etc.)
+        // Insert starting HTML elements for the final output (body, article, etc.)
         outputString += fs.readFileSync('src/layouts/partials/print-header.html','utf8');
 
         for (var fileToProcessIndex = 0; fileToProcessIndex < files.length; fileToProcessIndex += 4) {

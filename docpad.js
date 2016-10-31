@@ -18,13 +18,14 @@ var fs = require("fs-extra");
 var docsCore = require("docs-core");
 var guidelinesHelpers = require('./helpers/idg.js');
 var siteStructure = JSON.parse(fs.readFileSync("site-structure.json"));
-
-
-//var rootPath = process.cwd();
 var partialsDir = 'src/layouts/partials';
 var staticImagesDir = 'src/static/images';
 
 module.exports = {
+    filesPaths: [
+        docsCore.getStaticFilesDir(),
+        "static"
+    ],
     renderSingleExtensions: true,
     templateData: {
         siteStructure: siteStructure
@@ -112,6 +113,10 @@ module.exports = {
         writeAfter: function () {
             // Concatenate print files into 2-cards-per-side duplex order.
             guidelinesHelpers.helpers.createPrintFile()
+        },
+        generateAfter: function () {
+            // Delete the print directories created during renderBefore event.
+            guidelinesHelpers.helpers.deletePrintDirectories()
         }
     }
 };

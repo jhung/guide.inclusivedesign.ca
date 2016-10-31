@@ -407,21 +407,23 @@ setActiveCategory(inputColor) {
 }
 
 /* General list styling for topics sidebar */
-.docs-template-topics li a {
-    display: inline-block;
-    width: 100%;
-    padding-left: 1rem;
+.docs-template-topics {
+    li a {
+        display: inline-block;
+        width: 100%;
+        padding-left: 1rem;
+    }
+    
+    a:hover {
+        background: #000;
+        color: #fff;
+    }
 }
 
 .docs-template-topics-active {
     display: inline-block;
     width: 100%;
     padding-left: 1rem;
-}
-
-.docs-template-topics a:hover {
-    background: #000;
-    color: #fff;
 }
 
 /* remove bullet styling for USE list - category icons are used instead */
@@ -434,9 +436,74 @@ setActiveCategory(inputColor) {
     list-style-type: none;
 }
 
+/* Footer logos */
+
+.footer-logo-links svg {
+    width: 6rem;
+    height: 7rem;
+    fill: #fff;
+    stroke: header-footer-background;   
+}   
+
+/* remove hover and focus from the anchors (override template), apply to svgs only */
+a:hover.footer-logo-links { 
+    background: none; 
+    svg {
+        fill: header-footer-background;
+        background-color: #FFF;
+    }
+}
+
+a:focus.footer-logo-links {
+    outline: 0;
+    svg {
+        outline: header-footer-focus;
+    }
+}
+
+/* remove default link underline from svg logos */
+a.footer-logo-links {
+    text-decoration: none;
+} 
+
+/* Special styling for P4A Logo. The tree and "Prosperity" text should
+appear inverted in order to look proper. */
+#tree, #prosperity {
+    stroke: header-footer-background;
+    fill: header-footer-background;
+}
+
+a:hover #tree, a:hover #prosperity {
+    stroke: header-footer-background;
+    fill: #fff;
+}
+
 /* Contrast Themes */
 
 contrast-theme(foregroundColor, backgroundColor) {
+  
+/* remove hover and focus from the anchors (override template), apply to svgs only */  
+    a:hover.footer-logo-links {
+        background: none !important;
+        svg {
+            fill: foregroundColor;
+        }
+    }
+    
+    a:focus.footer-logo-links {
+        outline: 0 !important;
+        svg {
+            outline: 0.2rem solid backgroundColor;
+        }
+    }
+    
+/* Special styling for P4A Logo. The tree and "Prosperity" text should 
+appear inverted in order to look proper. */    
+    a:hover #tree, a:hover #prosperity {
+        stroke: foregroundColor;
+        fill: backgroundColor;
+    }
+    
     .idg-logo {
         path, circle {
             fill: backgroundColor;
@@ -491,10 +558,14 @@ contrast-theme(foregroundColor, backgroundColor) {
     .idg-iconInsights svg,
     .idg-iconTools svg,
     .idg-iconActivities svg,
-    .idg-iconDimensionsIndex svg {
+    .idg-iconDimensionsIndex svg,
+    #prosperity,
+    #tree {
         fill: foregroundColor;
+        stroke: backgroundColor;
     }
 
+    .footer-logo-links svg,
     #idg-path-image path {
         stroke: foregroundColor;
         fill: backgroundColor;
@@ -505,6 +576,16 @@ contrast-theme(foregroundColor, backgroundColor) {
     }
 }
 
+&.fl-link-enhanced {
+        .docs-template-category-active span {
+            border-bottom-width: 0.8rem !important;
+        }
+
+        .footer-logo-links {
+            text-decoration: none !important;
+        }
+}
+    
 .fl-theme-bw {
     contrast-theme(#000, #fff);
 }

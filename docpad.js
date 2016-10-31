@@ -39,13 +39,14 @@ module.exports = {
                 "/activities/":"/activities/MatchingGame.html",
                 "/principles/":"/insights/",
                 "/principles/DiverseParticipationAndPerspectives.html": "/insights/DiverseParticipationAndPerspectives.html",
-                "/principles/AutonomousUser.html": "/insights/AutonomousUser.html",
+                "/principles/AutonomousUser.html": "/insights/PersonalDiscovery.html",
                 "/principles/DisabilityAsMismatch.html": "/insights/DisabilityAsMismatch.html",
                 "/principles/IntegratedSolutions.html": "/insights/IntegratedSolutions.html",
                 "/principles/Interconnectedness.html": "/insights/Interconnectedness.html",
                 "/principles/OneSizeFitsOne.html": "/insights/OneSizeFitsOne.html",
                 "/principles/UserContinuedDesign.html": "/insights/UserContinuedDesign.html",
-                "/principles/VirtuousCycles.html": "/insights/VirtuousCycles.html"
+                "/principles/VirtuousCycles.html": "/insights/VirtuousCycles.html",
+                "/insights/AutonomousUser.html": "/insights/PersonalDiscovery.html"
             }
         },
         handlebars: {
@@ -62,7 +63,9 @@ module.exports = {
                 header: fs.readFileSync(partialsDir + '/' + 'header.html.handlebars', 'utf8'),
                 footer: fs.readFileSync(partialsDir + '/' + 'footer.html.handlebars', 'utf8'),
                 sidebar: fs.readFileSync(partialsDir + '/' + 'sidebar.html.handlebars', 'utf8'),
-                idrcLogo: fs.readFileSync(staticImagesDir + '/' + 'idrc-logo.svg', 'utf8')
+                idrcLogo: fs.readFileSync(staticImagesDir + '/' + 'idrc-logo.svg', 'utf8'),
+                floeLogo: fs.readFileSync(staticImagesDir + '/' + 'logo-floe.svg', 'utf8'),
+                p4aLogo: fs.readFileSync(staticImagesDir + '/' + 'logo-P4A.svg', 'utf8')
             }
         },
         highlightjs: {

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>404 - Page Not Found | Inclusive Design Guide</title>
+        <link rel="icon" type="image/png" href="images/favico.png">
+
+        <!-- FLUID-5639:
+        github pages serves this 404 document in place of the requested missing
+        document. Thus we do not know in advance the path to the local
+        Foundation and CSS files.
+
+        Therefore we use links to the CDN version of Foundation, and an
+        absolute reference to the CSS file.
+
+        https://issues.fluidproject.org/browse/FLUID-5639 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
+        <link rel="stylesheet" type="text/css" href="/lib/infusion/src/lib/jquery/ui/css/default-theme/jquery.ui.theme.css">
+
+        <link rel="stylesheet" type="text/css" href="/lib/infusion/src/framework/preferences/css/Enactors.css" />
+        <link rel="stylesheet" type="text/css" href="/lib/infusion/src/framework/preferences/css/PrefsEditor.css" />
+        <link rel="stylesheet" type="text/css" href="/lib/infusion/src/framework/preferences/css/SeparatedPanelPrefsEditor.css" />
+        <link rel="stylesheet" href="/css/idg.css">
+
+        <script type="text/javascript" src="/lib/infusion/infusion-uio.js"></script>
+        <script type="text/javascript" src="/js/DocsCore.js"></script>
+        <script type="text/javascript" src="/lib/jqueryui/jquery-ui.min.js"></script>
+    </head>
+
+    <body class="docs-template idg-index">
+
+        <div class="container docs-template-container">
+
+            <!-- Skip Link -->
+            <nav id="skip" class="fl-inverted-color">
+                <a href="#topics" class="docs-template-skip-topics">Skip to Topics</a>
+                <a href="#content" class="docs-template-skip-content">Skip to Content</a>
+            </nav>
+            <!-- END skip link -->
+
+            <header class="ignore-for-TOC row fl-inverted-color">
+                <!-- BEGIN markup for Preference Editor -->
+                <div class="flc-prefsEditor-separatedPanel fl-prefsEditor-separatedPanel">
+                    <!-- This is the div that will contain the Preference Editor component -->
+                    <div class="flc-slidingPanel-panel flc-prefsEditor-iframe"></div>
+
+                    <!-- This div is for the sliding panel that shows and hides the Preference Editor controls -->
+                    <div class="fl-panelBar">
+                        <span class="fl-prefsEditor-buttons">
+                            <button id="reset" class="flc-prefsEditor-reset fl-prefsEditor-reset"><span class="fl-icon-undo"></span> Reset</button>
+                            <button id="show-hide" class="flc-slidingPanel-toggleButton fl-prefsEditor-showHide"> Show/Hide</button>
+                        </span>
+                    </div>
+                </div>
+                <!-- END markup for Preference Editor -->
+
+                <div class="small-12 column docs-template-header">
+                    <a class="" href="/index.html" title="">
+                        <span class="idg-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61.387 77.161"><title>IDRC Logo</title><g fill="#00A0CC"><path d="M21.701 12.809c6.365 10.428 14.345 23.502 19.237 34.619 2.625-3.069 6.783-7.631 10.449-11.338V10.161H20.086l1.615 2.648z"/><path d="M42.243 50.534c1.541 3.866 2.62 7.419 3.018 10.443.454 3.457-.195 6.477-1.783 8.285-.965 1.102-2.21 1.684-3.598 1.684-1.236 0-2.506-.635-3.576-1.787-1.674-1.803-2.512-4.474-2.3-7.328.364-4.902 2.73-9.046 4.806-11.798-4.7-11.134-13.068-24.844-19.67-35.661-.885-1.45-1.746-2.86-2.565-4.211H1.387v65h50V40.393c-3.537 3.694-7.154 7.734-9.144 10.141z"/><path d="M38.501 67.117c.568.612 1.097.829 1.378.829.514 0 .952-.217 1.344-.662.986-1.125 1.395-3.393 1.062-5.916-.307-2.34-1.064-5.046-2.152-7.997-1.489 2.304-2.887 5.306-3.138 8.682-.148 1.996.416 3.889 1.506 5.064z"/><circle cx="56.887" cy="35.659" r="2.5"/><path d="M19.387 4.16a3.004 3.004 0 0 1-3.001 3.001 3 3 0 1 1 3.001-3.001z"/></g></svg>
+</span>
+                        <h1>Inclusive Design Guide</h1>
+                    </a>
+
+                    
+                    <nav class="right show-for-small-only docs-template-nav-mobile">
+                        <ul id="menu">
+                            <li class="docs-template-dropDown-header"><span class="docs-template-nav-mobile-icon"></span>
+                                <ul class="docs-template-dropDown">
+                                    
+                                    
+                                        
+                                            <li class="idg-navInsights"><a href="/insights/" title="Insights">Insights</a></li>
+                                        
+                                    
+                                        
+                                            <li class="idg-navPractices"><a href="/practices/" title="Practices">Practices</a></li>
+                                        
+                                    
+                                        
+                                            <li class="idg-navTools"><a href="/tools/" title="Tools">Tools</a></li>
+                                        
+                                    
+                                        
+                                            <li class="idg-navActivities"><a href="/activities/" title="Activities">Activities</a></li>
+                                        
+                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="docs-template-header">
+                    <nav class="idg-tabs small-12 column show-for-medium-up">
+                        <ul class="inline-list">
+                        
+                        
+                            
+                                <li class="idg-navInsights"><a href="/insights/" title="Insights"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.503 1.458 19.995 20.014"><title>Insights</title><path d="M17.942 11.517a8.44 8.44 0 0 1-8.441 8.441 8.44 8.44 0 0 1-8.441-8.441c0-4.675 3.779-8.455 8.441-8.455 4.662 0 8.441 3.779 8.441 8.455"/></svg>
+Insights</a></li>
+                            
+                        
+                            
+                                <li class="idg-navPractices"><a href="/practices/" title="Practices"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Practices</title><path d="M10 .499l9.504 9.5-9.5 9.504-9.504-9.5z"/></svg>
+Practices</a></li>
+                            
+                        
+                            
+                                <li class="idg-navTools"><a href="/tools/" title="Tools"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.55 1.438 20 20"><title>Tools</title><path d="M2.192 4.281h14.52v14.526H2.192z"/></svg>
+Tools</a></li>
+                            
+                        
+                            
+                                <li class="idg-navActivities"><a href="/activities/" title="Activities"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Activities</title><path d="M9.936 19.5L1.74 14.691l.069-9.499L10.066.5l8.194 4.809-.067 9.499z"/></svg>
+Activities</a></li>
+                            
+                        
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="docs-template-articleBody row">
+
+                <article id="content" class="small-12 column">
+                    <h1>404 - Page Not Found</h1>
+
+                    <div class="flc-toc-tocContainer docs-template-uio-toc"> </div>
+
+                    <div class="docs-template-articleContent">
+                        <p>Check the entered URL, or go to the <a href="/">Inclusive Design Guides homepage</a>.</p>
+
+                    </div>
+
+                    <p class="docs-template-githubLink"><a href="https://github.com/inclusive-design/guide.inclusivedesign.ca/tree/master/src/documents/404.md" rel="nofollow" target="_blank" class="link-external">Edit this Page on GitHub</a></p>
+                </article>
+
+            </div>
+
+            <footer class="row docs-template-footer fl-inverted-color">
+                <p>Created by the <a href="http://fluidproject.org/" rel="nofollow" target="_blank">Fluid Project</a>,<br/>
+                a project of the <a href="http://idrc.ocad.ca/" rel="nofollow" target="_blank">Inclusive Design Research Centre</a> at <a href="http://www.ocadu.ca/" target="_blank">OCAD University</a>.</p>
+                <p>
+                    <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
+                        <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/3.0/80x15.png" />
+                    </a>
+                    <br />
+                    This documentation is licensed under a
+                    <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+                </p>
+            </footer>
+
+            <script type="text/javascript">
+                docsCore.init("/");
+                jQuery( "#menu" ).menu({
+                    position: {my: "right top", at: "right bottom"},
+                    icons: {submenu:"ui-icon-blank"},
+                    // Remove the anchors from the tabindex as they are triggered
+                    // via the select event. (see below)
+                    create: function (event, ui) {
+                        jQuery("#menu .ui-menu-item a").attr("tabindex", -1);
+                    },
+                    // The jQuery menu doesn't seem to like it when the <a> are
+                    // specified as the "item" and are nested under an <li>. There
+                    // seems to be styling issues and occassionally an error thrown.
+                    // The page transition work around below is used to maintian the semantic structure,
+                    // while allowing the menu to behave as normal.
+                    select: function( event, ui ) {
+                        var location = ui.item.children("a").attr("href");
+                        if (location) {
+                            window.location.href = location;
+                        }
+                    }
+                });
+            </script>
+    </body>
+</html>
